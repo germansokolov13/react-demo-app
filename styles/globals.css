@@ -1,4 +1,14 @@
+body, html {
+    margin: 0;
+}
+
+body {
+    font-family: sans-serif;
+}
+
 .container {
+    max-width: 800px;
+    margin: 0 auto;
     padding: 30px;
 }
 
@@ -17,7 +27,24 @@
 }
 
 .control-element {
-    margin-bottom: 15px;
+    margin: 5px 0 15px;
+    padding: 3px;
+    border: 3px solid #49a450;
+    border-radius: 0;
+    outline: 0;
+}
+
+.control-element:focus {
+    border-color: #316f36;
+}
+
+.button {
+    border: 1px solid #49a450;
+    background-color: #77c27d;
+    padding: 5px;
+    max-width: 50px;
+    align-self: end;
+    font-weight: bold;
 }
 
 .posting {

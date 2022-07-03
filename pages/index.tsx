@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { getPostingsListBothSides } from '../services/posting-service';
 import PostsList, { PostsListProps } from '../components/posts-list';
 import AddPostingButton from '../components/add-posting-button';
+import Login from '../components/login';
 
 export async function getServerSideProps(): Promise<{ props: PostsListProps }> {
   return {
@@ -32,10 +33,12 @@ export default class Home extends Component<PostsListProps, PostsListProps> {
     const { postingsList } = this.state;
 
     return <>
-      <div>
+      <div className="container">
         <Head>
           <title>React Demo App (by Gherman Sokolov)</title>
         </Head>
+
+        <Login />
 
         <h1>React Demo App (by Gherman Sokolov)</h1>
         <Link href="/search">
@@ -47,3 +50,4 @@ export default class Home extends Component<PostsListProps, PostsListProps> {
     </>;
   }
 };
+
