@@ -12,10 +12,21 @@ body {
     padding: 30px;
 }
 
-.link {
+.text-block {
+    margin-bottom: 40px;
+    text-align: right;
+}
+
+.links-block {
     display: block;
     text-align: right;
     margin-bottom: 20px;
+}
+
+.link {
+    cursor: pointer;
+    color: #0a468c;
+    text-decoration: underline;
 }
 
 .form {
@@ -42,7 +53,7 @@ body {
     border: 1px solid #49a450;
     background-color: #77c27d;
     padding: 5px;
-    max-width: 50px;
+    max-width: 70px;
     align-self: end;
     font-weight: bold;
 }
@@ -57,4 +68,18 @@ body {
     margin: 0 0 5px;
     font-weight: bold;
     font-size: 16px;
+}
+
+.posting-image {
+    max-width: 100%;
+    max-height: 200px;
+}
+
+body .react-tabs__tab--selected {
+    border-radius: 0;
+}
+
+body .filepond--panel-root {
+    border-radius: 0;
+    background-color: #c3ddc5;
 }

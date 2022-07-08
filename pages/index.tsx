@@ -1,53 +1,60 @@
-import react, { Component } from 'react';
+import react, { useEffect } from 'react';
 import Head from 'next/head';
 import Link from 'next/link'
-import { getPostingsListBothSides } from '../services/posting-service';
-import PostsList, { PostsListProps } from '../components/posts-list';
+import PostsList from '../components/posts-list';
 import AddPostingButton from '../components/add-posting-button';
 import Login from '../components/login';
+import { loginStore } from '../stores/user-profile';
+import SendFile from '../components/send-file';
 
-export async function getServerSideProps(): Promise<{ props: PostsListProps }> {
-  return {
-    props: {
-      postingsList: await getPostingsListBothSides()
-    },
-  }
-}
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
+import { postingsListStore } from '../stores/postings-list';
 
-export default class Home extends Component<PostsListProps, PostsListProps> {
-  constructor(props) {
-    super(props);
-    this.state = {
-      postingsList: props.postingsList,
-    };
-  }
+export default function Home() {
+  const loadData = postingsListStore(state => state.loadLatest);
+  useEffect(() => {
+    loadData();
+  }, []);
 
-  update = () => {
-    getPostingsListBothSides()
-      .then((postingsList) => {
-        this.setState( { postingsList });
-      });
-  }
+  const user = loginStore(state => state.user);
 
-  render() {
-    const { postingsList } = this.state;
+  return <>
+    <div className="container">
+      <Head>
+        <title>React Demo App (by Gherman Sokolov)</title>
+      </Head>
 
-    return <>
-      <div className="container">
-        <Head>
-          <title>React Demo App (by Gherman Sokolov)</title>
-        </Head>
+      <Login />
 
-        <Login />
+      <h1>React Demo App (by Gherman Sokolov)</h1>
 
-        <h1>React Demo App (by Gherman Sokolov)</h1>
+      <div className="links-block">
         <Link href="/search">
           <a className="link">Full-text Search</a>
         </Link>
-        <AddPostingButton onAddPosting={this.update} />
-        <PostsList postingsList={postingsList} />
       </div>
-    </>;
-  }
-};
 
+      {user ? (
+        <Tabs>
+          <TabList>
+            <Tab>Text Message</Tab>
+            <Tab>Send Image</Tab>
+          </TabList>
+
+          <TabPanel>
+            <AddPostingButton />
+          </TabPanel>
+          <TabPanel>
+            <SendFile />
+          </TabPanel>
+        </Tabs>
+      ) : (
+        <div className="text-block">
+          (Log in to post text message or image)
+        </div>
+      )}
+
+      <PostsList />
+    </div>
+  </>;
+}

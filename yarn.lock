@@ -156,6 +156,11 @@ caniuse-lite@^1.0.30001332:
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001362.tgz#4a2a7136ca98313bee9b42f4f9a25bc2802e579d"
   integrity sha512-PFykHuC7BQTzCGQFaV6wD8IDRM3HpI83BXr99nNJhoOyDufgSuKlt0QVlWYt5ZJtEYFeuNVF5QY3kJcu8hVFjQ==
 
+clsx@^1.1.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/clsx/-/clsx-1.2.0.tgz#b0e415ea7537dbac01b169c5cec1caeb11d86566"
+  integrity sha512-EPRP7XJsM1y0iCU3Z7C7jFKdQboXSeHgEfzQUTlz7m5NP3hDrlz48aUsmNGp4pC+JOW9WA3vIRqlYuo/bl4Drw==
+
 content-disposition@0.5.3:
   version "0.5.3"
   resolved "https://registry.yarnpkg.com/content-disposition/-/content-disposition-0.5.3.tgz#e130caf7e7279087c5616c2007d0485698984fbd"
@@ -363,7 +368,7 @@ jwt-decode@^3.1.2:
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
   integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
 
-loose-envify@^1.1.0:
+loose-envify@^1.1.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/loose-envify/-/loose-envify-1.4.0.tgz#71ee51fa7be4caec1a63839f7e682d8132d30caf"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -466,6 +471,11 @@ next@12.2.0:
     "@next/swc-win32-ia32-msvc" "12.2.0"
     "@next/swc-win32-x64-msvc" "12.2.0"
 
+object-assign@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/object-assign/-/object-assign-4.1.1.tgz#2109adc7965887cfc05cbbd442cac8bfbb360863"
+  integrity sha512-rJgTQnkUnH1sFw8yT6VSU3zD3sWmu6sZhIseY8VX+GRu3P6F7Fu+JNDoXfklElbLJSnc3FUQHVe4cU5hj+BcUg==
+
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
@@ -501,6 +511,15 @@ process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/process-nextick-args/-/process-nextick-args-2.0.1.tgz#7820d9b16120cc55ca9ae7792680ae7dba6d7fe2"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
+
+prop-types@^15.5.0:
+  version "15.8.1"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.8.1.tgz#67d87bf1a694f48435cf332c24af10214a3140b5"
+  integrity sha512-oj87CgZICdulUohogVAR7AjlC0327U4el4L6eAvOqCeudMDVU0NThNaV+b9Df4dXgSP1gXMTnPdhfe/2qDH5cg==
+  dependencies:
+    loose-envify "^1.4.0"
+    object-assign "^4.1.1"
+    react-is "^16.13.1"
 
 proxy-addr@~2.0.5:
   version "2.0.6"
@@ -542,6 +561,19 @@ react-filepond@^7.1.2:
   version "7.1.2"
   resolved "https://registry.yarnpkg.com/react-filepond/-/react-filepond-7.1.2.tgz#8f04d06396a59b5980dda479c095ed23e6d1f68b"
   integrity sha512-vrlx9o/n+jGikh6jLey+PpUGYtEZn8MdeB6JFeX/5/N/Mu75IHG+MFQbv8R27bNXvS41mDtV9Fo5DG+s6siVIA==
+
+react-is@^16.13.1:
+  version "16.13.1"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
+  integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-tabs@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/react-tabs/-/react-tabs-5.1.0.tgz#5ef8fad015c71c23b0fff65bd9b3bd419219c27b"
+  integrity sha512-jsPVEPuhG7JljTo8Q4ujz4UKRpG90nHlDClAdvV5KrLxCHU+MT/kg7dmhq8fDv8+frciDtaYeFFlTVRLm4N5AQ==
+  dependencies:
+    clsx "^1.1.0"
+    prop-types "^15.5.0"
 
 react@18.2.0:
   version "18.2.0"

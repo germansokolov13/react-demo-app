@@ -1,26 +1,37 @@
-import react, { Component } from 'react';
-import { PostingEntity } from '../services/posting-service';
+import react from 'react';
+import { postingsListStore } from '../stores/postings-list';
 
-export type PostsListProps = {
-  postingsList: PostingEntity[],
-};
+export default function PostsList() {
+  const postingsList = postingsListStore(state => state.postingsList);
+  const isLoading = postingsListStore(state => state.isLoading);
 
-export default class PostsList extends Component<PostsListProps, {}> {
-  render() {
-    const { postingsList } = this.props;
+  return (
+    <div>
+      {isLoading && (
+        <div>
+          Loading...
+        </div>
+      )}
 
-    return (
-      <div>
-        {postingsList.map(posting => (
-          <article className="posting" key={posting._id}>
-            <h2 className="posting-title">{posting.title}</h2>
-            <div>{posting.content}</div>
-          </article>
-        ))}
-        {postingsList.length === 0 && (
-          <div>No records</div>
-        )}
-      </div>
-    );
-  }
+      {postingsList.map(posting => (
+        <article className="posting" key={posting._id}>
+          {posting.s3Key ? (
+            <>
+              <img className="posting-image" src={`http://127.0.0.1:9000/image-upload-results/${posting.s3Key}`} />
+              <div>{posting.createdAt}</div>
+            </>
+          ) : (
+            <>
+              <h2 className="posting-title">{posting.title}</h2>
+              <div>{posting.content}</div>
+              <div>{posting.createdAt}</div>
+            </>
+          )}
+        </article>
+      ))}
+      {postingsList.length === 0 && (
+        <div>No records</div>
+      )}
+    </div>
+  );
 }

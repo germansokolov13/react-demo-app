@@ -1,16 +1,10 @@
 import react from 'react';
 import '../styles/globals.css'
-import { ServiceLocator, ServiceLocatorContext } from "../services/service-locator";
-
-const serviceLocator = new ServiceLocator();
+import 'react-tabs/style/react-tabs.css';
 
 function MyApp({ Component, pageProps }) {
   return(
-    <>
-      <ServiceLocatorContext.Provider value={serviceLocator} >
-        <Component {...pageProps} />
-      </ServiceLocatorContext.Provider>
-    </>
+    <Component {...pageProps} />
   );
 }
 

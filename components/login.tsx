@@ -1,19 +1,21 @@
 import react, { useEffect } from 'react';
-import { loginStore } from '../services/user-profile';
+import { loginStore, User } from '../stores/user-profile';
 
 export default function Login() {
   let win;
 
-  const login = loginStore(state => state.login);
+  const logIn = loginStore(state => state.logIn);
+  const logOut = loginStore(state => state.logOut);
+  const initStore = loginStore(state => state.init);
 
   const onGetJwt = (event) => {
     const messageWithToken = event.data;
-    login(messageWithToken);
+    logIn(messageWithToken);
     window.removeEventListener('message', onGetJwt);
     win.close();
   }
 
-  const handleLogin = () => {
+  const handleLogIn = () => {
     window.addEventListener('message', onGetJwt);
     win = window.open('http://localhost:3001/auth/github', undefined, 'popup');
   }
@@ -21,14 +23,30 @@ export default function Login() {
   const user = loginStore(state => state.user);
 
   useEffect(() => {
+    initStore();
+
     return () => {
-      window.removeEventListener('message', this.onGetJwt);
-      win.close();
+      window.removeEventListener('message', onGetJwt);
+      if (win) {
+        win.close();
+      }
     };
   }, []);
 
   return <>
-    <b>{ user && user.name }</b>
-    <button onClick={handleLogin} type="button">login</button>
+    <div className="links-block">
+      {user ? (
+        <>
+          <strong>{user.name}</strong>
+          &nbsp;|&nbsp;
+          <a className="link" role="button" onClick={logOut}>Log Out</a>
+        </>
+      ) : (
+        <>
+          <a className="link" role="button" onClick={handleLogIn}>Log In</a>
+        </>
+      )}
+    </div>
+
   </>
 }

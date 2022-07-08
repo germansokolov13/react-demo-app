@@ -1,12 +1,15 @@
 import axios from 'axios';
 import config from '../env-config';
+import { withAuth } from './with-auth';
 
 const { backendAddress } = config;
 
 export type PostingEntity = {
   _id: string,
-  title: string,
-  content: string,
+  title?: string,
+  createdAt: string,
+  content?: string,
+  s3Key?: string,
 };
 
 export type PostingForm = {
@@ -14,16 +17,18 @@ export type PostingForm = {
   content: string,
 };
 
-export async function getPostingsListBothSides(): Promise<PostingEntity[]> {
-  return (await axios.get(`${backendAddress}/postings/get-list`)).data;
-}
+export const postingService = {
+  async loadLatest(): Promise<PostingEntity[]> {
+    const res = await axios.get(`${backendAddress}/postings/get-latest`);
+    return res.data;
+  },
 
-export class PostingService {
   async save(formData: PostingForm): Promise<void> {
-    await axios.post(`${backendAddress}/postings/create`, formData);
-  }
+    await withAuth(axios).post(`${backendAddress}/postings/create`, formData);
+  },
 
   async search(query: string): Promise<PostingEntity[]> {
-    return (await axios.get(`${backendAddress}/postings/search?query=${query}`)).data;
-  }
+    const res = await axios.get(`${backendAddress}/postings/search?query=${query}`);
+    return res.data;
+  },
 }
