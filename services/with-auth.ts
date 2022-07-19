@@ -1,28 +1,29 @@
 import { AxiosInstance } from 'axios';
-import { loginStore } from '../stores/user-profile';
+import { loginStore } from '../stores/login';
 
 export function withAuth(axiosInstance: AxiosInstance): AxiosInstance {
-  axiosInstance.interceptors.request.use(function (config) {
-    const user = loginStore.getState().user;
-    if (Date.now() < user.exp * 1000) {
-      const token = loginStore.getState().token;
-      if (token) {
+  axiosInstance.interceptors.request.use(
+    (config) => {
+      const { user } = loginStore.getState();
+      const isStillValid = Date.now() < user.exp * 1000;
+      if (isStillValid) {
+        const { token } = loginStore.getState();
+        // eslint-disable-next-line no-param-reassign
         config.headers.Authorization = `Bearer ${token}`;
+      } else {
+        loginStore.getState().logOut();
+        console.error('No auth!');
       }
-    } else {
-      const logOut = loginStore.getState().logOut;
-      logOut();
-      console.error('No auth!');
-    }
-    return config;
-  }, function (error) {
-    if (error.status === 401) {
-      const logOut = loginStore.getState().logOut;
-      logOut();
-      console.error('No auth!');
-    }
-    return Promise.reject(error);
-  });
+      return config;
+    },
+    (error) => {
+      if (error.status === 401) {
+        loginStore.getState().logOut();
+        console.error('No auth!');
+      }
+      return Promise.reject(error);
+    },
+  );
 
   return axiosInstance;
 }

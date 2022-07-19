@@ -1,3 +1,5 @@
 export default {
   backendAddress: 'http://localhost:3001',
+  wsBackendAddress: 'ws://localhost:3001',
+  s3Address: 'http://127.0.0.1:9000',
 };

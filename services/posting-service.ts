@@ -1,6 +1,7 @@
 import axios from 'axios';
 import config from '../env-config';
 import { withAuth } from './with-auth';
+import { User } from '../stores/login';
 
 const { backendAddress } = config;
 
@@ -10,6 +11,7 @@ export type PostingEntity = {
   createdAt: string,
   content?: string,
   s3Key?: string,
+  user: User,
 };
 
 export type PostingForm = {
@@ -31,4 +33,8 @@ export const postingService = {
     const res = await axios.get(`${backendAddress}/postings/search?query=${query}`);
     return res.data;
   },
-}
+
+  async deletePosting(postingId): Promise<void> {
+    await withAuth(axios).post(`${backendAddress}/postings/delete`, { id: postingId });
+  },
+};

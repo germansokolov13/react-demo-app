@@ -2,7 +2,7 @@
   "name": "react-demo-app",
   "private": true,
   "engines": {
-    "node": "14.15"
+    "node": "16"
   },
   "scripts": {
     "dev": "next dev",
@@ -13,11 +13,14 @@
     "axios": "^0.21.0",
     "express": "^4.17.1",
     "filepond": "^4.30.4",
+    "filepond-plugin-file-validate-type": "^1.2.8",
     "helmet": "^4.2.0",
     "jwt-decode": "^3.1.2",
     "mongodb": "^3.6.3",
-    "next": "12.2.0",
+    "next": "^12.2.2",
+    "prop-types": "^15.8.1",
     "react": "18.2.0",
+    "react-confirm-alert": "^3.0.6",
     "react-dom": "18.2.0",
     "react-filepond": "^7.1.2",
     "react-tabs": "^5.1.0",
@@ -25,7 +28,15 @@
     "zustand": "^4.0.0-rc.1"
   },
   "devDependencies": {
-    "@types/node": "^14.14.8",
-    "@types/react": "^16.9.56"
+    "@types/node": "16.11.7",
+    "@types/react": "^16.9.56",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "eslint": "^8.19.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.0",
+    "eslint-plugin-react": "^7.30.1"
   }
 }

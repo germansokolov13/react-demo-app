@@ -1,5 +1,7 @@
-import create from 'zustand'
-import jwt_decode from "jwt-decode";
+import create from 'zustand';
+import jwt_decode from 'jwt-decode';
+
+const LOCAL_STORAGE_KEY = 'auth-token';
 
 export class User {
   id: string;
@@ -11,10 +13,10 @@ export class User {
   exp: number;
 }
 
-interface UserState {
-  user: User|null;
+interface LoginState {
+  user: User | null;
 
-  token: string|null
+  token: string | null
 
   init: () => void;
 
@@ -23,20 +25,21 @@ interface UserState {
   logOut: () => void;
 }
 
-export const loginStore = create<UserState>((set) => ({
+export const loginStore = create<LoginState>((set) => ({
   user: null,
 
   token: null,
 
   init: () => {
-    const possibleToken = window.localStorage.getItem('auth-token');
+    const possibleToken = window.localStorage.getItem(LOCAL_STORAGE_KEY);
     if (possibleToken) {
       try {
         const possibleUser = jwt_decode(possibleToken) as User;
-        if (Date.now() < possibleUser.exp * 1000) {
+        const isStillValid = Date.now() < possibleUser.exp * 1000;
+        if (isStillValid) {
           set({ user: possibleUser, token: possibleToken });
         } else {
-          window.localStorage.removeItem('auth-token');
+          window.localStorage.removeItem(LOCAL_STORAGE_KEY);
         }
       } catch (e) {
         console.error('Token decode failed', e);
@@ -47,11 +50,11 @@ export const loginStore = create<UserState>((set) => ({
   logIn: (token) => {
     const user = jwt_decode(token) as User;
     set({ user, token });
-    window.localStorage.setItem('auth-token', token);
+    window.localStorage.setItem(LOCAL_STORAGE_KEY, token);
   },
 
   logOut: () => {
     set({ user: null, token: null });
-    window.localStorage.removeItem('auth-token');
+    window.localStorage.removeItem(LOCAL_STORAGE_KEY);
   },
 }));

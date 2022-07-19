@@ -1,4 +1,3 @@
-// server.js
 const express = require('express');
 const next = require('next');
 const helmet = require('helmet');
@@ -10,10 +9,6 @@ const handle = app.getRequestHandler();
 app.prepare().then(() => {
   const server = express();
   server.use(helmet());
-
-  server.get('/get-list', (req, res) => {
-
-  });
 
   server.get('*', (req, res) => handle(req, res));
 });

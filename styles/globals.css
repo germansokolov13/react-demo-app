@@ -4,12 +4,17 @@ body, html {
 
 body {
     font-family: sans-serif;
+    font-size: 16px;
 }
 
 .container {
     max-width: 800px;
     margin: 0 auto;
     padding: 30px;
+}
+
+h1 {
+    margin-top: 0;
 }
 
 .text-block {
@@ -23,9 +28,17 @@ body {
     margin-bottom: 20px;
 }
 
-.link {
-    cursor: pointer;
+.link, .linkish-button {
     color: #0a468c;
+}
+
+.linkish-button {
+    cursor: pointer;
+    display: inline;
+    border: none;
+    padding: 0;
+    background-color: unset;
+    font-size: inherit;
     text-decoration: underline;
 }
 
@@ -50,6 +63,7 @@ body {
 }
 
 .button {
+    cursor: pointer;
     border: 1px solid #49a450;
     background-color: #77c27d;
     padding: 5px;
@@ -58,7 +72,18 @@ body {
     font-weight: bold;
 }
 
+.button:focus, .button:hover {
+    background-color: #316f36;
+}
+
+.form-error {
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #e03c3c;
+}
+
 .posting {
+    position: relative;
     padding: 5px;
     border: 1px solid orange;
     margin-bottom: 15px;
@@ -70,9 +95,40 @@ body {
     font-size: 16px;
 }
 
+.posting-content {
+    margin: 0 0 5px;
+}
+
+.posting-date {
+    color: #666;
+    font-size: 12px;
+}
+
+.posting-user {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: #666;
+    font-size: 12px;
+}
+
 .posting-image {
     max-width: 100%;
     max-height: 200px;
+    margin: 0 0 5px;
+}
+
+.delete-posting-button {
+    cursor: pointer;
+    position: absolute;
+    display: block;
+    top: 7px;
+    right: 5px;
+    background-color: unset;
+    border: none;
+    padding: 0 5px;
+    font-size: 20px;
+    color: #e03c3c;
 }
 
 body .react-tabs__tab--selected {
@@ -82,4 +138,35 @@ body .react-tabs__tab--selected {
 body .filepond--panel-root {
     border-radius: 0;
     background-color: #c3ddc5;
+}
+
+body .filepond--item-panel {
+    border-radius: 0;
+}
+
+body .react-confirm-alert-body {
+    border-radius: 0;
+    color: inherit;
+}
+
+body .react-confirm-alert-body > h1 {
+    color: inherit;
+    font-size: 18px;
+}
+
+body .react-confirm-alert-button-group > button {
+    border-radius: 0;
+    border: 1px solid #49a450;
+    background-color: #77c27d;
+    padding: 5px;
+    max-width: 70px;
+    align-self: end;
+    font-weight: bold;
+    font-size: inherit;
+    color: inherit;
+}
+
+body .react-confirm-alert-button-group > button:focus,
+body .react-confirm-alert-button-group > button:hover {
+    background-color: #316f36;
 }

@@ -1,52 +1,50 @@
-import react, { useEffect } from 'react';
-import { loginStore, User } from '../stores/user-profile';
+import React, { useEffect } from 'react';
+import { loginStore } from '../stores/login';
+import config from '../env-config';
 
 export default function Login() {
-  let win;
+  let oauthPopup;
 
-  const logIn = loginStore(state => state.logIn);
-  const logOut = loginStore(state => state.logOut);
-  const initStore = loginStore(state => state.init);
+  const logIn = loginStore((state) => state.logIn);
+  const logOut = loginStore((state) => state.logOut);
+  const initStore = loginStore((state) => state.init);
 
   const onGetJwt = (event) => {
     const messageWithToken = event.data;
     logIn(messageWithToken);
     window.removeEventListener('message', onGetJwt);
-    win.close();
-  }
+    oauthPopup.close();
+  };
 
-  const handleLogIn = () => {
+  const onLoginClick = () => {
+    oauthPopup = window.open(`${config.backendAddress}/auth/github-pre`, undefined, 'popup');
     window.addEventListener('message', onGetJwt);
-    win = window.open('http://localhost:3001/auth/github', undefined, 'popup');
-  }
-
-  const user = loginStore(state => state.user);
+  };
 
   useEffect(() => {
     initStore();
 
     return () => {
       window.removeEventListener('message', onGetJwt);
-      if (win) {
-        win.close();
+      if (oauthPopup) {
+        oauthPopup.close();
       }
     };
   }, []);
 
-  return <>
+  const user = loginStore((state) => state.user);
+
+  return (
     <div className="links-block">
       {user ? (
         <>
           <strong>{user.name}</strong>
           &nbsp;|&nbsp;
-          <a className="link" role="button" onClick={logOut}>Log Out</a>
+          <button className="linkish-button" type="button" onClick={logOut}>Log Out</button>
         </>
       ) : (
-        <>
-          <a className="link" role="button" onClick={handleLogIn}>Log In</a>
-        </>
+        <button className="linkish-button" type="button" onClick={onLoginClick}>Log In</button>
       )}
     </div>
-
-  </>
+  );
 }
