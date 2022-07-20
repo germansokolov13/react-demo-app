@@ -10,6 +10,10 @@ export default function Login() {
   const initStore = loginStore((state) => state.init);
 
   const onGetJwt = (event) => {
+    if (event.origin !== config.backendAddress) {
+      console.error('Security error on message');
+      return;
+    }
     const messageWithToken = event.data;
     logIn(messageWithToken);
     window.removeEventListener('message', onGetJwt);
@@ -17,7 +21,7 @@ export default function Login() {
   };
 
   const onLoginClick = () => {
-    oauthPopup = window.open(`${config.backendAddress}/auth/github-pre`, undefined, 'popup');
+    oauthPopup = window.open(`${config.backendAddress}/auth/github/pre`, undefined, 'popup');
     window.addEventListener('message', onGetJwt);
   };
 
