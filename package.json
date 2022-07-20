@@ -1,6 +1,7 @@
 {
   "name": "react-demo-app",
-  "private": true,
+  "author": "Gherman Sokolov",
+  "license": "MIT",
   "engines": {
     "node": "16"
   },
