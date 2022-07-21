@@ -22,7 +22,8 @@ export default function Home() {
       <div className="container">
         <Login />
 
-        <h1>React Demo App (by Gherman Sokolov)</h1>
+        <h1>NestJS API + React Demo App</h1>
+        <h2>by Gherman Sokolov</h2>
 
         <div className="links-block">
           <Link href="/search">

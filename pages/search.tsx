@@ -41,9 +41,11 @@ export default function Search() {
       <div className="container">
         <Login />
         <h1>Search</h1>
-        <Link href="/">
-          <a className="link">Home</a>
-        </Link>
+        <div className="links-block">
+          <Link href="/">
+            <a className="link">Home</a>
+          </Link>
+        </div>
         <div className="form">
           <input className="control-element" value={query} onChange={handleQueryChange} onKeyUp={handleInputKey} />
           <button type="button" className="button" onClick={fetchData}>Search</button>
