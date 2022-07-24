@@ -3,6 +3,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import { postingsListStore } from '../stores/postings-list';
 import { loginStore } from '../stores/login';
 import { PostingEntity } from '../services/posting-service';
+import config from '../env-config';
 
 type PropsType = {
   itemsList: PostingEntity[],
@@ -42,7 +43,7 @@ export default function PostsList({ itemsList, handleRemove }: PropsType) {
       {itemsList.map((posting) => (
         <article className="posting" key={posting._id}>
           {posting.s3Key ? (
-            <img alt="User posted" className="posting-image" src={`http://127.0.0.1:9000/image-upload-results/${posting.s3Key}`} />
+            <img alt="User posted" className="posting-image" src={`${config.s3Address}/image-upload-results/${posting.s3Key}`} />
           ) : (
             <>
               <h2 className="posting-title">{posting.title}</h2>

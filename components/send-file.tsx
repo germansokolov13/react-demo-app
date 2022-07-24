@@ -35,12 +35,13 @@ export default function SendFile() {
     }
   }, []);
 
+  // revert/undo function is changed just "tap to close" and do nothing instead of deleting
   return (
     <div className="form">
       <FilePond
         allowMultiple={false}
         labelTapToUndo="Tap to close"
-        server={{ process: processFile }}
+        server={{ process: processFile, revert: null }}
         allowFileTypeValidation
         acceptedFileTypes={['image/png', 'image/jpeg', 'image/gif', 'image/webp', 'image/svg']}
       />
