@@ -4,6 +4,7 @@
 # next.js build
 /.next
 next-env.d.ts
+/out
 
 # settings
 env-config.js
