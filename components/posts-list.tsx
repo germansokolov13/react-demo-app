@@ -47,7 +47,9 @@ export default function PostsList({ itemsList, handleRemove }: PropsType) {
           ) : (
             <>
               <h2 className="posting-title">{posting.title}</h2>
-              <div className="posting-content">{posting.content}</div>
+              {posting.content.split(/[\n\r]+/).map((paragraph) => (
+                <p className="posting-content">{paragraph}</p>
+              ))}
             </>
           )}
 
